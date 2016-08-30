@@ -1,0 +1,40 @@
+import sys
+
+
+with open(sys.argv[1], 'r') as test_cases:
+    for line in test_cases:
+        line = line.rstrip('\n')  
+        list = line.split(" ")
+        k=0
+        while True :
+            try :
+                if type(int(list[k])) == int  :
+                    break
+            except :  k=1+k
+
+        val = int(list[k+1])
+        if  (list[k-1])=='+' : 
+            res = int(list[k]) + val
+        if  (list[k-1])=='*' : 
+            res = int(list[k]) * val
+        if  (list[k-1])=='/' : 
+            res = int(list[k]) / val
+        p = k+2
+        k=k-1
+        val = res
+        if k != 0 :
+      
+            while True:
+                if  (list[k-1])=='+' : 
+                    res = val + int(list[p])
+                if  (list[k-1])=='*' : 
+                    res = val * int(list[p])
+                if  (list[k-1])=='/' : 
+                    if int(list[p])==0:
+                        pass
+                    else :res =val / int(list[p])
+                k=k-1
+                p = p+1
+                val = res    
+                if k==0 or p==len(list): break
+        print res
